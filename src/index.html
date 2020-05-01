@@ -3,12 +3,66 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Blurhasher</title>
+        <script src="https://unpkg.com/react@16.4.1/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@16.4.1/umd/react-dom.production.min.js"></script>
+        <link rel="stylesheet" href="./skeleton.css" />
+        <style>
+            #result {
+                font-size: 2rem;
+                margin: 2rem 0;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello world</h1>
-        <img
-            src="data:image/png;base64,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"
-        />
+        <main class="container">
+            <h1>Blurhasher</h1>
+            <form id="form">
+                <div class="row">
+                    <div class="six columns">
+                        <label for="imageUrl">URL</label>
+                        <input
+                            type="text"
+                            required
+                            class="u-full-width"
+                            placeholder="Fill in the URL of an image"
+                            name="imageUrl"
+                            id="imageUrl"
+                        />
+                    </div>
+                </div>
+                <input
+                    class="button-primary"
+                    type="submit"
+                    value="Hash it up!"
+                />
+            </form>
+            <code id="result" style="display: none;"></code>
+            <div id="react-target"></div>
+            <script src="./bundle.js"></script>
+            <script src="https://gist.github.com/ThomasAndrewMacLean/5d95bee2a672ccc5760bea6ce2dac2a6.js"></script>
+            <script>
+                const form = document.getElementById('form');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const imageURL = document.getElementById('imageUrl').value;
+                    fetch('/blur', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ imageURL }),
+                    })
+                        .then((x) => x.json())
+                        .then((y) => {
+                            console.log(y);
+                            const result = document.getElementById('result');
+                            result.innerText = y.hash;
+                            result.style.display = 'inline-block';
+                        });
+                });
+            </script>
+        </main>
     </body>
 </html>
