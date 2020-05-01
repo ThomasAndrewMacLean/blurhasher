@@ -33,7 +33,7 @@ const App = () => {
     };
     return (
         <div>
-            <p>lorem</p>
+            <p>lorem???</p>
             <form onSubmit={getHash}>
                 <div class="row">
                     <div class="six columns">
