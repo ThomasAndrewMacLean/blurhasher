@@ -5,7 +5,7 @@
             "args": [
                 "build",
                 "-t",
-                "gcr.io/blurhasher/latest",
+                "gcr.io/thomasmaclean/latest",
                 "."
             ]
         },
@@ -13,7 +13,7 @@
             "name": "gcr.io/cloud-builders/docker",
             "args": [
                 "push",
-                "gcr.io/blurhasher/latest"
+                "gcr.io/thomasmaclean/latest"
             ]
         },
         {
@@ -24,7 +24,7 @@
                 "deploy",
                 "staging",
                 "--image",
-                "gcr.io/blurhasher/latest",
+                "gcr.io/thomasmaclean/latest",
                 "--region",
                 "europe-west1",
                 "--platform",
@@ -34,6 +34,6 @@
         }
     ],
     "images": [
-        "gcr.io/blurhasher/latest"
+        "gcr.io/thomasmaclean/latest"
     ]
 }
