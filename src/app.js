@@ -1,10 +1,12 @@
 import express from "express";
 import { encodeImageToBlurhash } from "./utils";
 import volleyball from "volleyball";
+import cors from "cors";
 // MIDDLEWARE
 const app = express();
 app.use(express.json());
 app.use(volleyball);
+app.use(cors());
 
 // ROUTES
 app.get("/ping", (req, res) => res.send("pong"));
