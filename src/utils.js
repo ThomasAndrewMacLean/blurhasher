@@ -1,38 +1,50 @@
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-import { encode } from "blurhash";
+import { encode, decode } from 'blurhash';
+
+const pixels = decode('LEHV6nWB2yk8pyo0adR*.7kCMdnj', 32, 32);
+
 const { document } = new JSDOM(`...`, {
-  resources: "usable",
+    resources: 'usable',
 }).window;
 
 const loadImage = async (src) =>
-  new Promise((resolve, reject) => {
-    const img = document.createElement("img");
-    img.onload = () => resolve(img);
-    img.onerror = (...args) => reject(args);
-    img.src = src;
-  });
+    new Promise((resolve, reject) => {
+        const img = document.createElement('img');
+        img.onload = () => resolve(img);
+        img.onerror = (...args) => reject(args);
+        img.src = src;
+    });
 
 const getImageData = (image) => {
-  try {
-    const canvas = document.createElement("canvas");
-    canvas.width = image.width;
-    canvas.height = image.height;
-    const context = canvas.getContext("2d");
-    context.drawImage(image, 0, 0);
-    return context.getImageData(0, 0, image.width, image.height);
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        return context.getImageData(0, 0, image.width, image.height);
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export const encodeImageToBlurhash = async (imageUrl) => {
-  try {
-    const image = await loadImage(imageUrl);
-    const imageData = getImageData(image);
-
-    return encode(imageData.data, imageData.width, imageData.height, 4, 4);
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        const image = await loadImage(imageUrl);
+        const imageData = getImageData(image);
+        const hash = encode(
+            imageData.data,
+            imageData.width,
+            imageData.height,
+            4,
+            3
+        );
+        return {
+            hash,
+            pixels: decode(hash, image.width, image.height),
+        };
+    } catch (error) {
+        console.error(error);
+    }
 };
