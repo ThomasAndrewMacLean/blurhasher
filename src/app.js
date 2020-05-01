@@ -22,7 +22,7 @@ app.use("*", (req, res) => {
   res.status(405).end();
 });
 // START LISTENING
-const port = process.env.PORT || 9898;
+const port = process.env.PORT || 8080;
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
