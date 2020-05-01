@@ -7,62 +7,14 @@
         <script src="https://unpkg.com/react@16.4.1/umd/react.production.min.js"></script>
         <script src="https://unpkg.com/react-dom@16.4.1/umd/react-dom.production.min.js"></script>
         <link rel="stylesheet" href="./skeleton.css" />
-        <style>
-            #result {
-                font-size: 2rem;
-                margin: 2rem 0;
-            }
-        </style>
     </head>
     <body>
         <main class="container">
             <h1>Blurhasher</h1>
-            <form id="form">
-                <div class="row">
-                    <div class="six columns">
-                        <label for="imageUrl">URL</label>
-                        <input
-                            type="text"
-                            required
-                            class="u-full-width"
-                            placeholder="Fill in the URL of an image"
-                            name="imageUrl"
-                            id="imageUrl"
-                        />
-                    </div>
-                </div>
-                <input
-                    class="button-primary"
-                    type="submit"
-                    value="Hash it up!"
-                />
-            </form>
-            <code id="result" style="display: none;"></code>
+
             <div id="react-target"></div>
             <script src="./bundle.js"></script>
             <script src="https://gist.github.com/ThomasAndrewMacLean/5d95bee2a672ccc5760bea6ce2dac2a6.js"></script>
-            <script>
-                const form = document.getElementById('form');
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const imageURL = document.getElementById('imageUrl').value;
-                    fetch('/blur', {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ imageURL }),
-                    })
-                        .then((x) => x.json())
-                        .then((y) => {
-                            console.log(y);
-                            const result = document.getElementById('result');
-                            result.innerText = y.hash;
-                            result.style.display = 'inline-block';
-                        });
-                });
-            </script>
         </main>
     </body>
 </html>
