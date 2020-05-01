@@ -24,5 +24,5 @@ app.use("*", (req, res) => {
 // START LISTENING
 const port = process.env.PORT || 9898;
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${9898}`)
+  console.log(`Example app listening at http://localhost:${port}`)
 );
