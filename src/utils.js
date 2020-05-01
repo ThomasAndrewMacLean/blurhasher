@@ -1,8 +1,7 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 import { encode, decode } from 'blurhash';
-
-const pixels = decode('LEHV6nWB2yk8pyo0adR*.7kCMdnj', 32, 32);
+import btoa from 'btoa';
 
 const { document } = new JSDOM(`...`, {
     resources: 'usable',
@@ -42,9 +41,22 @@ export const encodeImageToBlurhash = async (imageUrl) => {
         );
         return {
             hash,
-            pixels: decode(hash, image.width, image.height),
         };
     } catch (error) {
         console.error(error);
     }
+};
+
+export const getPixels = (hash) => {
+    const pixels = decode(hash, 32, 32);
+    console.log(pixels);
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(32, 32);
+    imageData.data.set(pixels);
+    ctx.putImageData(imageData, 0, 0);
+    return canvas.toDataURL();
+
+    //  return Buffer.from(pixels).toString('base64');
 };
