@@ -2,7 +2,7 @@
   "name": "blurhasher",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "./src/app.js",
   "scripts": {
     "start": "node -r esm .",
     "dev": "nodemon -r esm .",
