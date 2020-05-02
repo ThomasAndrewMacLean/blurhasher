@@ -41,6 +41,8 @@ export const encodeImageToBlurhash = async (imageUrl) => {
         );
         return {
             hash,
+            width: imageData.width,
+            height: imageData.height,
         };
     } catch (error) {
         console.error(error);

@@ -706,10 +706,16 @@ var App = function App() {
 
   var canvas = Object(__WEBPACK_IMPORTED_MODULE_0_react__["useRef"])(null);
 
+  var loadedImage = function loadedImage() {
+    console.log('image loaded');
+    setTimeout(function () {
+      canvas.current.style.opacity = 0;
+    }, 1000);
+  };
+
   var getHash = function getHash(e) {
     e.preventDefault();
     var imageURL = document.getElementById('imageUrl').value;
-    imageUrlSet(imageURL);
     fetch('/blur', {
       method: 'POST',
       headers: {
@@ -723,45 +729,51 @@ var App = function App() {
       return x.json();
     }).then(function (y) {
       hashSet(y.hash);
-      var pixels = Object(__WEBPACK_IMPORTED_MODULE_2_blurhash__["decode"])(y.hash, 250, 250);
-      canvas.current.width = 250;
-      canvas.current.height = 250;
+      var width = y.width,
+          height = y.height;
+      var pixels = Object(__WEBPACK_IMPORTED_MODULE_2_blurhash__["decode"])(y.hash, width, height);
+      canvas.current.width = width;
+      canvas.current.height = height;
       var ctx = canvas.current.getContext('2d');
-      var imageData = ctx.createImageData(250, 250);
+      var imageData = ctx.createImageData(width, height);
       imageData.data.set(pixels);
       ctx.putImageData(imageData, 0, 0);
+      imageUrlSet(imageURL);
     });
   };
 
-  return /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("p", null, "lorem???"), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
+  return /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
     onSubmit: getHash
   }, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    "class": "row"
+    className: "row"
   }, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    "class": "six columns"
+    className: "six columns"
   }, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
-    "for": "imageUrl"
+    htmlFor: "imageUrl"
   }, "URL"), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
     type: "text",
     required: true,
-    "class": "u-full-width",
+    className: "u-full-width",
     placeholder: "Fill in the URL of an image",
     name: "imageUrl",
     id: "imageUrl"
   }))), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-    "class": "button-primary",
+    className: "button-primary",
     type: "submit",
     value: "Hash it up!"
-  })), hash && /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("code", {
+  }), hash && /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("code", {
     style: {
       fontSize: '2rem',
       marginBottom: '2rem'
     }
-  }, hash), hash && imageUrl && /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+  }, hash)), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    className: "image-wrap"
+  }, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
+    onLoad: loadedImage,
     src: imageUrl
   }), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("canvas", {
     ref: canvas
-  }));
+  })));
 };
 
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, {}, null), document.getElementById('react-target'));

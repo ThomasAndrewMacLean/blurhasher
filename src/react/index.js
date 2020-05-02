@@ -6,11 +6,16 @@ const App = () => {
     const [hash, hashSet] = useState('');
     const [imageUrl, imageUrlSet] = useState('');
     const canvas = useRef(null);
+    const loadedImage = () => {
+        console.log('image loaded');
 
+        setTimeout(() => {
+            canvas.current.style.opacity = 0;
+        }, 1000);
+    };
     const getHash = (e) => {
         e.preventDefault();
         const imageURL = document.getElementById('imageUrl').value;
-        imageUrlSet(imageURL);
         fetch('/blur', {
             method: 'POST',
             headers: {
@@ -22,26 +27,27 @@ const App = () => {
             .then((x) => x.json())
             .then((y) => {
                 hashSet(y.hash);
-                const pixels = decode(y.hash, 250, 250);
-                canvas.current.width = 250;
-                canvas.current.height = 250;
+                const { width, height } = y;
+                const pixels = decode(y.hash, width, height);
+                canvas.current.width = width;
+                canvas.current.height = height;
                 const ctx = canvas.current.getContext('2d');
-                const imageData = ctx.createImageData(250, 250);
+                const imageData = ctx.createImageData(width, height);
                 imageData.data.set(pixels);
                 ctx.putImageData(imageData, 0, 0);
+                imageUrlSet(imageURL);
             });
     };
     return (
         <div>
-            <p>lorem???</p>
             <form onSubmit={getHash}>
-                <div class="row">
-                    <div class="six columns">
-                        <label for="imageUrl">URL</label>
+                <div className="row">
+                    <div className="six columns">
+                        <label htmlFor="imageUrl">URL</label>
                         <input
                             type="text"
                             required
-                            class="u-full-width"
+                            className="u-full-width"
                             placeholder="Fill in the URL of an image"
                             name="imageUrl"
                             id="imageUrl"
@@ -49,18 +55,20 @@ const App = () => {
                     </div>
                 </div>
                 <input
-                    class="button-primary"
+                    className="button-primary"
                     type="submit"
                     value="Hash it up!"
                 />
+                {hash && (
+                    <code style={{ fontSize: '2rem', marginBottom: '2rem' }}>
+                        {hash}
+                    </code>
+                )}
             </form>
-            {hash && (
-                <code style={{ fontSize: '2rem', marginBottom: '2rem' }}>
-                    {hash}
-                </code>
-            )}
-            {hash && imageUrl && <img src={imageUrl}></img>}
-            <canvas ref={canvas}></canvas>
+            <div className="image-wrap">
+                <img onLoad={loadedImage} src={imageUrl}></img>
+                <canvas ref={canvas}></canvas>
+            </div>
         </div>
     );
 };

@@ -7,6 +7,30 @@
         <script src="https://unpkg.com/react@16.4.1/umd/react.production.min.js"></script>
         <script src="https://unpkg.com/react-dom@16.4.1/umd/react-dom.production.min.js"></script>
         <link rel="stylesheet" href="./skeleton.css" />
+        <style>
+            .image-wrap {
+                position: relative;
+            }
+            /* .image-wrap img {
+                position: absolute;
+                left: 0;
+            } */
+            img {
+                width: 100%;
+            }
+            canvas {
+                width: 100%;
+            }
+            .image-wrap canvas {
+                position: absolute;
+                left: 0;
+                transition: opacity 400ms ease;
+                opacity: 1;
+            }
+            .image-wrap canvas:hover {
+                opacity: 0.6 !important;
+            }
+        </style>
     </head>
     <body>
         <main class="container">

@@ -40,10 +40,5 @@
         "react-dom": "^16.13.1",
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.10.3"
-    },
-    "husky": {
-        "hooks": {
-            "pre-push": "npm run build"
-        }
     }
 }

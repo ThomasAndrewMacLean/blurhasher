@@ -22,8 +22,8 @@ app.post('/blur', async (req, res) => {
 
     if (!imageURL) res.status(404).send('no imageURL found in body');
 
-    const { hash } = await encodeImageToBlurhash(imageURL);
-    res.json({ imageURL, hash });
+    const { hash, width, height } = await encodeImageToBlurhash(imageURL);
+    res.json({ imageURL, hash, width, height });
 });
 
 app.use('*', (req, res) => {
