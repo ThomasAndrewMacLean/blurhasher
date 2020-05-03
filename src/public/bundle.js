@@ -774,14 +774,22 @@ var App = function App() {
   }), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("canvas", {
     ref: canvas
   })), /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    style: "position: relative; padding-bottom: 56.25%; height: 0;"
+    style: {
+      position: 'relative',
+      paddingBottom: '56.25%',
+      height: 0
+    }
   }, /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("iframe", {
     src: "https://www.loom.com/embed/a2787e0276c84100928408bdaa1709e5",
-    frameborder: "0",
-    webkitallowfullscreen: true,
-    mozallowfullscreen: true,
-    allowfullscreen: true,
-    style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    frameBorder: "0",
+    allowFullScreen: true,
+    style: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%'
+    }
   })));
 };
 
