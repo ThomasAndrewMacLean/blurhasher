@@ -1,20 +1,12 @@
 {
-
-    "steps": [{
-            "nalme": "gcr.io/cloud-builders/docker",
-            "args": [
-                "build",
-                "-t",
-                "gcr.io/thomasmaclean/latest",
-                "."
-            ]
+    "steps": [
+        {
+            "name": "gcr.io/cloud-builders/docker",
+            "args": ["build", "-t", "gcr.io/thomasmaclean/latest", "."]
         },
         {
             "name": "gcr.io/cloud-builders/docker",
-            "args": [
-                "push",
-                "gcr.io/thomasmaclean/latest"
-            ]
+            "args": ["push", "gcr.io/thomasmaclean/latest"]
         },
         {
             "name": "gcr.io/cloud-builders/gcloud",
@@ -33,7 +25,5 @@
             ]
         }
     ],
-    "images": [
-        "gcr.io/thomasmaclean/latest"
-    ]
+    "images": ["gcr.io/thomasmaclean/latest"]
 }
