@@ -3,7 +3,6 @@ const { JSDOM } = jsdom;
 import { encode } from 'blurhash';
 
 const { document } = new JSDOM(`...`, {
-    //important
     resources: 'usable',
 }).window;
 
