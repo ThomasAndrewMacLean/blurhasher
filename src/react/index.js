@@ -72,12 +72,12 @@ const App = () => {
             <div
                 style={{
                     position: 'relative',
-                    paddingBottom: '56.25%',
+                    paddingBottom: '60.913705583756354%',
                     height: 0,
                 }}
             >
                 <iframe
-                    src="https://www.loom.com/embed/a2787e0276c84100928408bdaa1709e5"
+                    src="https://www.loom.com/embed/ca6dba1ac15e4c7c8a720536c6d93d36"
                     frameBorder="0"
                     allowFullScreen
                     style={{
