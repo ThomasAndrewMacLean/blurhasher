@@ -69,6 +69,16 @@ const App = () => {
                 <img onLoad={loadedImage} src={imageUrl}></img>
                 <canvas ref={canvas}></canvas>
             </div>
+            <div style="position: relative; padding-bottom: 60.913705583756354%; height: 0;">
+                <iframe
+                    src="https://www.loom.com/embed/ca6dba1ac15e4c7c8a720536c6d93d36"
+                    frameborder="0"
+                    webkitallowfullscreen
+                    mozallowfullscreen
+                    allowfullscreen
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                ></iframe>
+            </div>
             <div
                 style={{
                     position: 'relative',
@@ -77,7 +87,7 @@ const App = () => {
                 }}
             >
                 <iframe
-                    src="https://www.loom.com/embed/ca6dba1ac15e4c7c8a720536c6d93d36"
+                    src="https://www.loom.com/embed/a2787e0276c84100928408bdaa1709e5"
                     frameBorder="0"
                     allowFullScreen
                     style={{
